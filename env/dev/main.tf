@@ -1,3 +1,6 @@
+# tfvarsから取得
+variable "lambda_arn" {}
+
 provider "aws" {
   region = local.region
 
@@ -32,7 +35,18 @@ module "s3" {
 }
 
 module "cloudfront" {
-  source         = "../../modules/cloudfront"
-  s3_origin_id   = module.s3.aws_s3_bucket_static_id
-  s3_domain_name = module.s3.aws_s3_bucket_static_bucket_regional_domain_name
+  source                    = "../../modules/cloudfront"
+  s3_origin_id              = module.s3.aws_s3_bucket_static_id
+  s3_domain_name            = module.s3.aws_s3_bucket_static_bucket_regional_domain_name
+  lambda_edge_qualified_arn = module.lambda_edge.aws_lambda_function_lambda_edge_qualified_arn
+
+}
+
+module "iam_role" {
+  source = "../../modules/iam"
+}
+
+module "lambda_edge" {
+  source                                        = "../../modules/lambda_edge"
+  aws_lambda_function_lambda_edge_function_name = local.lambda_function_name
 }

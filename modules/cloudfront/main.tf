@@ -3,22 +3,26 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled = true
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = var.s3_origin_id
-
-    forwarded_values {
-      query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    target_origin_id       = var.s3_origin_id
     viewer_protocol_policy = "https-only"
     min_ttl                = 0
     default_ttl            = 0
     max_ttl                = 0
+
+    lambda_function_association {
+      event_type   = "viewer-request"
+      lambda_arn   = var.lambda_edge_qualified_arn
+      include_body = false
+    }
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
   }
 
   origin {
