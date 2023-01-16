@@ -17,3 +17,7 @@ lambda_arn = "arn:aws:lambda:us-east-1:[アカウントID]:function:[Lambda関�
 $ cd env/dev/
 $ terraform apply
 ```
+
+### 関連リポジトリ
+
+https://github.com/katsuya-n/sls_lambdaedge
