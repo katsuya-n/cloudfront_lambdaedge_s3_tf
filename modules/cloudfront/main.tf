@@ -1,5 +1,6 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  comment = "knakano static test"
+  comment = "knakano static test distribution"
+
   enabled = true
 
   default_cache_behavior {
@@ -44,7 +45,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 }
 
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "knakano-oac-static"
+  name                              = var.cloudfront_oac_name
   description                       = "knakano static OAC Policy"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"

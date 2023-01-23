@@ -1,19 +1,18 @@
+### 最初の準備
 
-### 初期設定
-
-```bash
-$ touch env/dev/terraform.tfvars
-```
-
-terraform.tfvarsに次を追記。
-
-```
-lambda_arn = "arn:aws:lambda:us-east-1:[アカウントID]:function:[Lambda関数名]"
-```
+tfstateファイル管理用のS3バケットを作成する。
 
 ### apply
 
 ```bash
 $ cd env/dev/
 $ terraform apply
+```
+
+作成したstaticのS3バケットにhello.jsonとnot_found.jsonをアップロード。
+アクセスできるか確認してみる。
+
+```
+https://[ID].cloudfront.net/hello.json
+https://[ID].cloudfront.net/not_found.json
 ```

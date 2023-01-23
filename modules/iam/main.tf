@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_for_lambda_edge" {
-  name = "knakano_iam_for_lambda_test_role"
+  name = var.iam_role_name
 
   assume_role_policy = <<EOF
 {
