@@ -16,3 +16,7 @@ $ terraform apply
 https://[ID].cloudfront.net/hello.json
 https://[ID].cloudfront.net/not_found.json
 ```
+
+### 関連リポジトリ
+
+https://github.com/katsuya-n/sls_lambdaedge
